@@ -1,22 +1,22 @@
 [
     {
         "id":1,
-        "country":"India",
-        "city":"Delhi",
+        "countryName":"India",
+        "cityName":"Delhi",
         "population":19000000
 
     },
     {
         "id":2,
-        "country":"SriLanka",
-        "city":"Colombo",
+        "countryName":"SriLanka",
+        "cityName":"Colombo",
         "population":5600000
 
     },
     {
         "id":3,
-        "country":"USA",
-        "city":"Chicago",
+        "countryName":"USA",
+        "cityName":"Chicago",
         "population":2920000
 
     }

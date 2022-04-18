@@ -10,8 +10,8 @@ const App = () =>{
     const[contacts,setContacts] = useState(data);
     const[editContactId,setEditContactId] = useState(null);
     const[editFormData,setEditFormData] = useState({
-        country:"",
-        city:"",
+        countryName:"",
+        cityName:"",
         population:""
     })
 
@@ -20,8 +20,8 @@ const App = () =>{
         setEditContactId(contact.id);
 
         const formValues = {
-            country: contact.country,
-            city: contact.city,
+            countryName: contact.countryName,
+            cityName: contact.cityName,
             population: contact.population
         }
     }
@@ -36,9 +36,35 @@ const App = () =>{
         setEditFormData(newFormData);
     }
 
+    const handleEditFormSubmit = (event) =>{
+        event.preventDefault();
+        const editedContact = {
+            id:editContactId,
+        countryName:editFormData.countryName,
+        cityName:editFormData.cityName,
+        population:editFormData.population
+    }
+    const newContacts = [...contacts];
+    const index = contacts.findIndex((el)=>el.id===editContactId)
+    newContacts[index] = editedContact;
+        setContacts(newContacts);
+        setEditContactId(null)
+    }
+    const handleCancelClick = () =>{
+        setEditContactId(null);
+    }
+
+    const handleDeleteClick=(contactId)=>{
+        const newContacts = [...contacts];
+        const index = contacts.findIndex((el)=>el.id===contactId)
+
+        newContacts.splice(index,1);
+        setContacts(newContacts);
+    }
+
     return (
         <div className="app-container">
-            <form action="">
+            <form onSubmit={handleEditFormSubmit}>
 
                 <table>
                     <thead>
@@ -55,7 +81,7 @@ const App = () =>{
                         {contacts.map((el)=>(
                             <Fragment>
 
-                                {editContactId===el.id? (<EditableRow editFormData={editFormData} handleEditFormChange={handleEditFormChange}/>):(<ReadOnlyRow el={el} handleEditClick={handleEditClick}/>)}
+                                {editContactId===el.id? (<EditableRow editFormData={editFormData} handleEditFormChange={handleEditFormChange} handleCancelClick={handleCancelClick}/>):(<ReadOnlyRow el={el} handleEditClick={handleEditClick} handleDeleteClick={handleDeleteClick}/>)}
 
                             </Fragment>
                         ))}
